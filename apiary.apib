@@ -1,0 +1,461 @@
+FORMAT: 1A
+HOST: http://daonengine.daon.com
+
+#DaonEngine API
+===============
+DaonEngine API is a REST interface to the DaonEngine which abides by HATEOAS principals.
+
+## Resources
+------------
+This initial version of the DaonEngine REST API contains three resources:  Domains, Identities, Biometrics, and Verifications.
+
+###Creating Resources
+> Resources can be created in two ways.  
+> 1. For resources where the user is specifying the unique id a PUT request can be made to the resource with the unique id as a parameter in the URI.  
+> 2. For resources where the system is generating a unique id a POST request can be made to the URI of the resource collection and the unique id will be returned in the response.  
+> The body of all POST requests must be represented in JSON.
+> ####Request
+> Requests that contain body content must specify the HTTP Content-Type header with a value of application/json.
+> ####Response
+> Create responses contain:  
+> *   **HTTP Status Code** *The code indicates the success or failure of the request*  
+> *   **HTTP Headers** *Various response headers are set relevant to the particular request*  
+> *   **Response Body** *Successful POST requests contain the created entity resource representation, while failed requests show an error representation.*  
+> Possible response codes include:  
+> * **201  CREATED** *The request was successful, the resource was created and the response body contains the representation. The Location header contains the new resource’s URI.*  
+> * **400  BAD REQUEST** *The data given in the POST or PUT failed validation. Inspect the response body for details.*  
+> * **404  NOT FOUND** *The resource could not be located based on the specified URI.*  
+> * **405  METHOD NOT ALLOWED** *The POST method is not supported for the resource.*  
+> * **409  CONFLICT** *The resource could not be creates because another resource already exists or conflicts with one you are submitting.*  
+> * **415  UNSUPPORTED MEDIA TYPE** *The request Content-Type header specifies a type that is not supported. Only application/json is currently supported.*  
+> * **500  SERVER ERROR** *The resource could not be created/updated. Please try again.*  
+> * **503  SERVICE UNAVAILABLE** *Temporarily unable to service the request. Please wait and try again*  
+
+###Retrieving Resources
+> A resource representation can be retrieved by issuing a HTTP GET to its URI
+> ####Request
+> Where multiple representations of a resource are available the Accept header must be set the media type that is required. This will default to application/json if it is not specified.
+> ####Response
+> Create responses contain:  
+> *   **HTTP Status Code** *The code indicates the success or failure of the request*  
+> *   **HTTP Headers** *Various response headers are set relevant to the particular request*  
+> *   **Response Body** *Successful requests contain the created entity resource representation, while failed requests show an error representation.*  
+> Possible response codes include:  
+> * **200  OK** *The request was successful and the response body contains the representation requested.*  
+> * **404  NOT FOUND** *The resource could not be located based on the specified URI.*  
+> * **415  UNSUPPORTED MEDIA TYPE** *The request Accept header specifies a type that is not supported. Only application/json is currently supported.*  
+> * **500  SERVER ERROR** *The resource could not be created/updated. Please try again.*  
+> * **503  SERVICE UNAVAILABLE** *Temporarily unable to service the request. Please wait and try again*  
+
+###Updating Resources
+> To update a resource, submit an HTTP POST to a resource URI. Any POST body must be represented as JSON. You can submit one or more attributes of a resource, but at least one attribute must be specified.
+> ####Request
+> Requests that contain body content must specify the HTTP Content-Type header with a value of application/json. Updates enable updating one or more resource attribute values. At least one resource attribute value must be specified.
+> ####Response
+> Create responses contain:  
+> *   **HTTP Status Code** *The code indicates the success or failure of the request*  
+> *   **HTTP Headers** *Various response headers are set relevant to the particular request*  
+> *   **Response Body** *Successful requests contain the created entity resource representation, while failed requests show an error representation.*  
+> Possible response codes include:  
+> * **200  OK** *The request was successful and the response body contains the updated representation as requested.*  
+> * **400  BAD REQUEST** *The data given in the POST or PUT failed validation. Inspect the response body for details.*  
+> * **404  NOT FOUND** *The resource could not be located based on the specified URI.*  
+> * **405  METHOD NOT ALLOWED** *The POST method is not supported for the resource.*  
+> * **415  UNSUPPORTED MEDIA TYPE** *The request Content-Type header specifies a type that is not supported. Only application/json is currently supported.*  
+> * **500  SERVER ERROR** *The resource could not be created/updated. Please try again.*  
+> * **503  SERVICE UNAVAILABLE** *Temporarily unable to service the request. Please wait and try again*  
+
+## DaonEngine API Root [/api_v1]
+DaonEngine API entry point.
+
+This resource does not have any attributes. Instead it offers the links to the API resources.
+
+## Retrieve Entry Point [GET]
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "href": "http://daonengine.daon.com/api_v1",
+                "domains": {
+                    "href": "http://daonengine.daon.com/api_v1/domains"
+                }
+            }
+
+## Domains Collection [/api_v1/domains]
+### List all Domains [GET]
+List all of the domains configured in the DaonEngine
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "href": "http://daonengine.daon.com/api_v1/domains",
+                "items":[
+                    {
+                        "href": "http://daonengine.daon.com/api_v1/domains/9001",
+                        "id": 9001,
+                        "name": "User"
+                    }, {
+                        "href": "http://daonengine.daon.com/api_v1/domains/9002",
+                        "id": 9002,
+                        "name": "Admin"
+                    }
+                ]
+            }
+
+## Domain [/api_v1/domains/{id}]
+A Domain with all its details
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+
+### Retrieve a Domain [GET]
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "href": "http://daonengine.daon.com/api_v1/domains/9001",
+                "id": 9001,
+                "name": "User",
+                "ciSummaryAuditEnabled": true,
+                "identities": {
+                    "href": "http://daonengine.daon.com/api_v1/domains/9001/identities"
+                }
+            }
+
+# Group Identity
+Identity-related resources of the *DaonEngine API*.
+
+## Identity [/api_v1/domains/{id}/identities/{uname}]
+A single Identity object. The Identity resource is the central resource in the DaonEngine API. It represents a single identity in the domain.
+
+The Identity resource has the following attributes:
+
+- uname
+- ciid
+- createdDTM
+- biographics
+ - firstName
+ - lastName
+- memberships
+ - groupName
+ - alias
+ - href
+
+The states *ciid* and *createdDTM* are assigned by the DaonEngine at the moment of creation. The state *uname* can either be user specified or assisgned by DaonEngine at the depening on how it is created.
+
+The *biographics* attribute contains a list of the identities biographic data in DaonEngine, *firstName* and *lastName* are examples of identity attributes that are stored in the  *_DOMAIN_BIOGRAPHICS table of the DaonEngine.
+Each column name in that table is converted from it's underscored name to camelCase in the JSON object. eg. FIRST_NAME becomes firstName.
+
+The *memberships* attribute contains an array of the group memberships for the identity. 
+If the membership uses the convention that the *groupName* is the name of a domain and the *alias* is a uname within the domain then the *href* field will contain a link to the related identity.
+
+(NOTE:  *biographics* and *memberships* are not treated as resources because they are not entities within DaonEngine with publicaly exposed identifiers. )
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + uname (required, string, `pkenny`) ... String `uname` (unique name) of the identity to perform action with.
+
++ Model (application/json)
+
+    JSON representation of Identity Resource.
+
+
+
+    + Body
+    
+            {
+                "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/pkenny",
+                "uname": "pkenny",
+                "ciid": 1,
+                "createdDTM": "2014-07-16T13:48:22.378Z",
+                "biographics": {
+                    "firstName": "Paul",
+                    "lastName": "Kenny"
+                },
+                "memberships": [
+                    {
+                        "groupName" : "Admin Domain",
+                        "alias" : "pfkenny",
+                        "href" : "http://daonengine.daon.com/api_v1/domains/9002/identities/pfkenny"
+                    }
+                ],
+                "biometrics": {
+                    "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/pkenny/biometrics"
+                },
+                "verifications": {
+                    "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/pkenny/verifications"
+                }
+            }
+
+### Retrieve a Single Identity [GET]
++ Response 200
+
+    [Identity][]
+    
+### Create an Identity with a specified uname [PUT]
+
++ Request (application/json)
+
+            {
+                "firstName": "Paul",
+                "lastName": "Kenny"
+            }
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + uname (required, string, `pkenny`) ... String `uname` (unique name) of the identity to create.
+
++ Response 201 (application/json)
+
+
+### Update an Identity [POST]
+
++ Request (application/json)
+
+            {
+               "biographics": {
+                    "firstName": "Paul"
+                },
+             }
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + uname (required, string, `pkenny`) ... String `uname` (unique name) of the identity to create.
+
++ Response 200
+
+    [Identity][]
+
+### Delete an Identity [DELETE]
++ Response 204
+
+## Identities Collection [/api_v1/domains/{id}/identities{?offset,limit,q}]
+Collection of all Identities.
+
+The Identities Collection resource lists the identities in a domain returning their URI's along with some basic information such as uname.
+
++ Model (application/json)
+
+    + Body
+    
+            {
+                "href": "http://daonengine.daon.com/api_v1/domains/9001/identities",
+                "offset": 0,
+                "limit": 25,
+                "items": [
+                    {
+                        "href": "http://daonengine.daon.com/api_v1/domains/9001/pkenny",
+                        "uname": "pkenny",
+                        "ciid": 1,
+                        "createdDTM": "2014-07-16T13:48:22.378Z"
+                    }, {
+                        "href": "http://daonengine.daon.com/api_v1/domains/9001/cdelong",
+                        "uname": "cdelong",
+                        "ciid": 2,
+                        "createdDTM": "2014-04-01T15:35:16.235Z"
+                    }
+                ]
+            }
+
+### List All Identities in Domain [GET]
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + offset = `0` (optional, number) ... The array offset at which to start returning items (defaults to 0)
+    + limit = `100` (optional, number) ... The maximum number of items to return
+    + q (optional, string) ... A DaonEngine query string which can be used to filter the list
+
++ Response 200
+
+    [Identities Collection][]
+
+### Add an Identity with generated UName [POST]
+Creates an Identity whereby DaonEngine will generate the *uname*. Note that the list related parameters in the URI should be ommitted in this case.
+
++ Request (application/json) 
+
+            {
+               "biographics": {
+                    "firstName": "Paul",
+                    "lastName": "Kenny"
+                }
+            }
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+
++ Response 201 (application/json)
+
+    + Body
+    
+            {
+                "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/pkenny",
+                "uname": "pkenny",
+                "ciid": 1,
+                "createdDTM": "2014-07-16T13:48:22.378Z",
+                "biographics": {
+                    "firstName": "Paul",
+                    "lastName": "Kenny"
+                }
+             }
+
+# Group Biometrics
+Biometric-related resources of the *DaonEngine API*.
+
+## Biometric [/api_v1/domains/{id}/identities/{uname}/biometrics/{uq}/{tq}]
+A single biometric object. The Biometric resource is a resource of an identity that contains biometric data.
+
+The Biometric resource has the following attributes:
+
+- usageQualfier : A text representation of the usage qualifier
+- typeQualifer : A text representation of the type qualifier
+- biometricData : The biometric binary data encoded as base64
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + uname (required, string, `pkenny`) ... String `uname` (unique name) of the identity to perform action with.
+    + uq (required, number, `14`) ...Numeric `uq` (Usage Qualifier) is the usage qualfier of the biometric modality. eg. 14 is the usage qualfier of "Left Index" (Supported usage qualfiers are listed in the DaonEngine documentation)
+    + tq (required, number, `129`) ...Numeric `tq` (Type Qualifier) is the type qualfier of the biometric data. eg. 129 is the type qualfier for a "WSQ Compressed Image" (Supported type qualfiers are listed in the DaonEngine documentation)
+
++ Model (application/json)
+
+    JSON representation of Biometric Resource.
+
+
+    + Body
+    
+            {
+                "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/pkenny/biometrics/14/129",
+                "usageQualifier": "Left Index",
+                "typeQualifier": "WSQ Compressed Image",
+                "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+            }
+
+### Retrieve a Single Biometric [GET]
++ Request (application/json)
+
+
++ Response 200
+
+    [Biometric][]
+
+
++ Response 200 (image/jpeg)
+
+### Add biometric data to an identity [PUT]
+The request contains the biometric data base64 encoded.
+
++ Request (application/json)
+
+            {
+                "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+            }
+
+
++ Response 201 (application/json)
+
+### Update biometric data [POST]
+This request contains the biometric data (base64 encoded) that will replace the existing biometric data in DaonEngine. 
+
++ Request (application/json)
+
+            {
+                "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+            }
+
+
++ Response 200
+
+    [Biometric][]
+
+### Delete a Biometric [DELETE]
++ Response 204
+
+## Biometrics Collection [/api_v1/domains/{id}/identities/{uname}/biometrics{?offset,limit,expand}]
+### List all Biometrics [GET]
+List all of the domains configured in the DaonEngine
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + uname (required, string, `pkenny`) ... String `uname` (unique name) of the identity to perform action with.
+    + offset = `0` (optional, number) ... The array offset at which to start returning items (defaults to 0)
+    + limit = `100` (optional, number) ... The maximum number of items to return
+    + expand = `false` (optional, string, `true`) ... String `uname`should be set to true or false to indicate whether or not biometric data should be sent.
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/pkenny/biometrics",
+                "items":[
+                    {
+                        "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/pkenny/biometrics/14/129",
+                        "usageQualifier": "Left Index",
+                        "typeQualifier": "WSQ Compressed Image",
+                        "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                    }, {
+                        "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/pkenny/biometrics/14/129",
+                        "usageQualifier": "Right Index",
+                        "typeQualifier": "WSQ Compressed Image",
+                        "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                    }
+                ]
+            }
+
+# Group Verifications
+Verification-related resources of the *DaonEngine API*.
+
+## Verification [/api_v1/domains/{id}/identities/{uname}/verifications]
+A resource that is used to perform verifications against identities stored in DaonEngine. 
+
+- verifyResult : The match result as determined by the policy
+- fusedScore : The fused FMR probablility for the overall match
+ - normalisedScore: The normalised FMR probability
+ - rawScore : The raw score from the algorithm
+
+A list of the normalised and raw score is returned for each biometirc
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + uname (required, string, `pkenny`) ... String `uname` (unique name) of the identity to perform action with.
+
++ Model (application/json)
+
+    JSON representation of Biometric Resource.
+
+
+    + Body
+    
+            {
+                "verifyResult": "MATCH",
+                "fusedScore": "1.0e-3",
+                "scores" : [
+                    {
+                        "normalisedScore": "1.0e-3",
+                        "rawScore": "120"
+                    }
+                ]
+            }
+            
+### Perform a Verification [POST]
+Performs a verification against an identity's biometric data with the biometric data supplied in the request body.
+
++ Request (application/json)
+
+            {
+                "biometrics" : [
+                    {
+                        "uq": "14",
+                        "tq": "129",
+                        "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                    }
+                ]
+            }
+
++ Response 200 (application/json)
+
+    [Verification][]
+
