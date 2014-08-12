@@ -341,9 +341,6 @@ The Biometric resource has the following attributes:
 
     [Biometric][]
 
-
-+ Response 200 (image/jpeg)
-
 ### Add biometric data to an identity [PUT]
 The request contains the biometric data base64 encoded.
 
@@ -375,7 +372,7 @@ This request contains the biometric data (base64 encoded) that will replace the 
 
 ## Biometrics Collection [/api_v1/domains/{id}/identities/{uname}/biometrics{?offset,limit,expand}]
 ### List all Biometrics [GET]
-List all of the domains configured in the DaonEngine
+List all of the biometrics stored against an identity in DaonEngine.
 
 + Parameters
     + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
@@ -404,6 +401,23 @@ List all of the domains configured in the DaonEngine
                     }
                 ]
             }
+
+## Biometric Images [/api_v1/domains/{id}/identities/{uname}/biometrics/{uq}{?width,height}]
+### Download an image of a biometric[GET]
+Get an image of a biometric that is stored in DaonEngine
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + uname (required, string, `pkenny`) ... String `uname` (unique name) of the identity to perform action with.
+    + uq (required, number, `14`) ...Numeric `uq` (Usage Qualifier) is the usage qualfier of the biometric modality. eg. 14 is the usage qualfier of "Left Index" (Supported usage qualfiers are listed in the DaonEngine documentation)
+    + width = `150` (optional, number) ... The width to resize the biometric image to (defaults to original image width)
+    + height = `150` (optional, number) ... The height to resize the biometric image to (defaults to original image height)
+
++ Headers
+            Accept: image/jpeg
+
++ Response 200 (image/jpeg)
+
 
 # Group Verifications
 Verification-related resources of the *DaonEngine API*.
