@@ -479,3 +479,52 @@ Performs a verification against an identity's biometric data with the biometric 
 
     [Verification][]
 
+#Group Search
+Search related resources of the *Daon Engine API*.
+
+##Search Data [/api_v1/domains/{id}/searchtransactions/{searchtransactionid}/searchdata]
+A resource that represents the data that was sent in to a search operation.
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + searchtransactionid (required, string, `MWS000651`) ... String `searchtransactionid` of the search transaction to perform action with.
+    
++ Model (application/json)
+
+    JSON representation of Search Data Resource.
+
+
+    + Body
+    
+            {
+                "href": "http://daonengine.daon.com/api_v1/domains/9002/searchtransactions/MWS000651/searchdata",
+                "searchTransactionId" : "MWS000651",
+                "domainId" : "9002",
+                "searchPolicyId" : "900201008",
+                "groupIdentifiers" : {
+                    "Group 1", "Group 2"
+                },
+                "searchParameters" : {
+                    "candidateListSize" : 10,
+                    "matchThreshold" : 1.0E-3
+                },
+                "resultNotificationAddress" : "http://return.address.com/return-service",
+                "probeIdentity" : {
+                    "biographics" : {
+                        "firstName" : "Bobby",
+                        "lastName" : "Smith",
+                    },
+                    "biometrics" : {
+                        "href": "http://daonengine.daon.com/api_v1/domains/9002/searchtransaction/MWS000651/probeidentity/biometrics"
+                    }
+                }
+            }
+
+### Retrieve Search Data [GET]
++ Request (application/json)
+
+
++ Response 200
+
+    [Search Data][]
+
