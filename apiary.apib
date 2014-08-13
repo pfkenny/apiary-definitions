@@ -379,7 +379,7 @@ List all of the biometrics stored against an identity in DaonEngine.
     + uname (required, string, `pkenny`) ... String `uname` (unique name) of the identity to perform action with.
     + offset = `0` (optional, number) ... The array offset at which to start returning items (defaults to 0)
     + limit = `100` (optional, number) ... The maximum number of items to return
-    + expand = `false` (optional, string, `true`) ... String `uname`should be set to true or false to indicate whether or not biometric data should be sent.
+    + expand = `false` (optional, string, `true`) ... String `expand`should be set to true or false to indicate whether or not biometric data should be sent.
     + uq (optional, number) ...Numeric `uq` (Usage Qualifier) if specified will restrict the list to only return biometrics corresponding to that usage qualifier. (Supported usage qualfiers are listed in the DaonEngine documentation)
     + tq (optional, number) ...Numeric `tq` (Type Qualifier) if specified will restrict the list to only return biometrics corresponding to that type qualifier. (Supported type qualfiers are listed in the DaonEngine documentation)
 
@@ -521,10 +521,48 @@ A resource that represents the data that was sent in to a search operation.
             }
 
 ### Retrieve Search Data [GET]
-+ Request
-
-
 + Response 200
 
     [Search Data][]
+
+##Search Data Probe Identity Biometrics [/api_v1/domains/{id}/searchtransactions/{searchtransactionid}/probeidentity/biometrics{?offset,limit,expand,uq,tq}]
+A resource that represents the biometrics associated with the probe identity that was sent in to a search operation.
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + searchtransactionid (required, string, `MWS000651`) ... String `searchtransactionid` of the search transaction to perform action with.
+    + offset = `0` (optional, number) ... The array offset at which to start returning items (defaults to 0)
+    + limit = `100` (optional, number) ... The maximum number of items to return
+    + expand = `false` (optional, string, `true`) ... String `expand`should be set to true or false to indicate whether or not biometric data should be sent.
+    + uq (optional, number) ...Numeric `uq` (Usage Qualifier) if specified will restrict the list to only return biometrics corresponding to that usage qualifier. (Supported usage qualfiers are listed in the DaonEngine documentation)
+    + tq (optional, number) ...Numeric `tq` (Type Qualifier) if specified will restrict the list to only return biometrics corresponding to that type qualifier. (Supported type qualfiers are listed in the DaonEngine documentation)
+    
++ Model (application/json)
+
+    JSON representation of Search Data Probe Identity Biometrics Resource.
+
+
+    + Body
+    
+            {
+                "href": "http://daonengine.daon.com/api_v1/domains/9002/searchtransactions/MWS000651/probeidentity/biometrics",
+                "biometrics" : [
+                    {
+                        "href": "http://daonengine.daon.com/api_v1/domains/9002/searchtransaction/MWS000651/probeidentity/biometrics/12000/44"
+                        "usageQualifier": 12000,
+                        "typeQualifier": 44,
+                        "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                    } , {
+                        "href": "http://daonengine.daon.com/api_v1/domains/9002/searchtransaction/MWS000651/probeidentity/biometrics/15/129"
+                        "usageQualifier": 15,
+                        "typeQualifier": 129,
+                        "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                    }
+                ]
+            }
+
+### Retrieve Search Data Probe Identity Biometrics[GET]
++ Response 200
+
+    [Search Data Probe Identity Biometrics][]
 
