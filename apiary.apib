@@ -370,7 +370,7 @@ This request contains the biometric data (base64 encoded) that will replace the 
 ### Delete a Biometric [DELETE]
 + Response 204
 
-## Biometrics Collection [/api_v1/domains/{id}/identities/{uname}/biometrics{?offset,limit,expand}]
+## Biometrics Collection [/api_v1/domains/{id}/identities/{uname}/biometrics{?offset,limit,expand,uq,tq}]
 ### List all Biometrics [GET]
 List all of the biometrics stored against an identity in DaonEngine.
 
@@ -380,6 +380,8 @@ List all of the biometrics stored against an identity in DaonEngine.
     + offset = `0` (optional, number) ... The array offset at which to start returning items (defaults to 0)
     + limit = `100` (optional, number) ... The maximum number of items to return
     + expand = `false` (optional, string, `true`) ... String `uname`should be set to true or false to indicate whether or not biometric data should be sent.
+    + uq (optional, number) ...Numeric `uq` (Usage Qualifier) if specified will restrict the list to only return biometrics corresponding to that usage qualifier. (Supported usage qualfiers are listed in the DaonEngine documentation)
+    + tq (optional, number) ...Numeric `tq` (Type Qualifier) if specified will restrict the list to only return biometrics corresponding to that type qualifier. (Supported type qualfiers are listed in the DaonEngine documentation)
 
 + Response 200 (application/json)
 
