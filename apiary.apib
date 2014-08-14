@@ -613,31 +613,53 @@ A resource that represents the results of a search operation.
             {
                 "href": "http://daonengine.daon.com/api_v1/domains/9002/searchtransactions/MWS000651/searchresults",
                 "searchTransactionId" : "MWS000651",
-                "transactionStatus" : "SUCCEEDED"
-                "domainId" : "9002",
-                "searchPolicyId" : "900201008",
-                "groupIdentifiers" : {
-                    "Group 1", "Group 2"
-                },
-                "searchParameters" : {
-                    "candidateListSize" : 10,
-                    "matchThreshold" : 1.0E-3
-                },
-                "resultNotificationAddress" : "http://return.address.com/return-service",
-                "probeIdentity" : {
-                    "biographics" : {
-                        "firstName" : "Bobby",
-                        "lastName" : "Smith",
-                    },
-                    "biometrics" : {
-                        "href": "http://daonengine.daon.com/api_v1/domains/9002/searchtransaction/MWS000651/probeidentity/biometrics"
+                "transactionStatus" : "SUCCEEDED",
+                "candidates" : [
+                    {
+                        "href" : "http://daonengine.daon.com/api_v1/domains/9002/identities/skastelli",
+                        "uname" : "skastelli",
+                        "rank" : 1,
+                        "result" : "HIT",
+                        "scores" : [
+                            {
+                                "scoreType" : "Raw Score",
+                                "value" : "76289",
+                                "usageQualifier" : 15,
+                                "typeQualifier" : 169
+                            },
+                            {
+                                "scoreType" : "FMR",
+                                "value" : "1.0E-6",
+                                "usageQualifier" : 15,
+                                "typeQualifier" : 169
+                            }
+                        ]
+                    }, {
+                        "href" : "http://daonengine.daon.com/api_v1/domains/9002/identities/jbainbridge",
+                        "uname" : "jbainbridge",
+                        "rank" : 2,
+                        "result" : "HIT",
+                        "scores" : [
+                            {
+                                "scoreType" : "Raw Score",
+                                "value" : "62791",
+                                "usageQualifier" : 15,
+                                "typeQualifier" : 169
+                            },
+                            {
+                                "scoreType" : "FMR",
+                                "value" : "2.9725E-6",
+                                "usageQualifier" : 15,
+                                "typeQualifier" : 169
+                            }
+                        ]
                     }
-                }
+                ]
             }
 
 ### Retrieve Search Data [GET]
 + Response 200
 
-    [Search Data][]
+    [Search Results][]
     
 
