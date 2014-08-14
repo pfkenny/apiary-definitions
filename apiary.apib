@@ -783,3 +783,36 @@ has made a decision as to whether or not candidates in the candidate list of a s
     + searchtransactionid (required, string, `MWS000651`) ... String `searchtransactionid` of the search transaction to perform action with.
     
 + Response 201 (application/json)    
+
+### Update Adjudicate Search Results [POST]
++ Request (application/json)
+
+        {
+            "searchAdjudications" : [
+                    {
+                        "candidateIdentifier" : "jbainbridge",
+                        "candidateRank" : 2,
+                        "overallAdjudicationDecision" : {
+                            "decision" : "NO_MATCH",
+                            "detail" : "Not a match due to dissimilarities in fingerprints."
+                        },
+                        "sampleDecisions" : [
+                            {
+                                "decision" : "NO_MATCH",
+                                "detail" : "Minutiae are sufficiently dissimilar and can not be explained reasonably.",
+                                "usageQualifier" : 21,
+                                "typeQualfiier" : 129
+                            }
+                        ]
+                    }
+                ]
+        }
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + searchtransactionid (required, string, `MWS000651`) ... String `searchtransactionid` of the search transaction to perform action with.
+    
++ Response 200
+
+    [Adjudicate Search Results][]
+
