@@ -42,7 +42,7 @@ This initial version of the DaonEngine REST API contains four resources:  Domain
 > *   **Response Body** *Successful requests contain the created entity resource representation, while failed requests show an error representation.*  
 > Possible response codes include:  
 > * **200  OK** *The request was successful and the response body contains the representation requested.*  
-> * **404  NOT FOUND** *The resource could not be located based on the specified URI.*
+> * **404  NOT FOUND** *The resource could not be located based on the specified URI.*  
 > * **406  NOT ACCEPTABLE** *The request Accept header specifies a meda type that the method cannot supply for the requested resource.*  
 > * **415  UNSUPPORTED MEDIA TYPE** *The request Content-Type header specifies a type that is not supported. Only application/json is currently supported.*  
 > * **500  SERVER ERROR** *The resource could not be created/updated. Please try again.*  
@@ -342,6 +342,25 @@ The Biometric resource has the following attributes:
 + Response 200
 
     [Biometric][]
+    
++ Request
+    
+    + Headers
+    
+            Accept: image/png
+                
+
++ Response 200 (image/png)
+
++ Request
+    
+    + Headers
+    
+            Accept: image/jpeg
+                
+
++ Response 200 (image/jpeg)
+
 
 ### Add biometric data to an identity [PUT]
 The request contains the biometric data base64 encoded.
