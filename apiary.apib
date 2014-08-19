@@ -42,8 +42,9 @@ This initial version of the DaonEngine REST API contains four resources:  Domain
 > *   **Response Body** *Successful requests contain the created entity resource representation, while failed requests show an error representation.*  
 > Possible response codes include:  
 > * **200  OK** *The request was successful and the response body contains the representation requested.*  
-> * **404  NOT FOUND** *The resource could not be located based on the specified URI.*  
-> * **415  UNSUPPORTED MEDIA TYPE** *The request Accept header specifies a type that is not supported. Only application/json is currently supported.*  
+> * **404  NOT FOUND** *The resource could not be located based on the specified URI.*
+> * **406  NOT ACCEPTABLE** *The request Accept header specifies a meda type that the method cannot supply for the requested resource.*  
+> * **415  UNSUPPORTED MEDIA TYPE** *The request Content-Type header specifies a type that is not supported. Only application/json is currently supported.*  
 > * **500  SERVER ERROR** *The resource could not be created/updated. Please try again.*  
 > * **503  SERVICE UNAVAILABLE** *Temporarily unable to service the request. Please wait and try again*  
 
