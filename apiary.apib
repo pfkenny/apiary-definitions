@@ -330,8 +330,8 @@ The Biometric resource has the following attributes:
     
             {
                 "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/pkenny/biometrics/14/129",
-                "usageQualifier": "Left Index",
-                "typeQualifier": "WSQ Compressed Image",
+                "usageQualifier": 11,
+                "typeQualifier": 129,
                 "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
             }
 
@@ -414,13 +414,13 @@ List all of the biometrics stored against an identity in DaonEngine.
                 "items":[
                     {
                         "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/pkenny/biometrics/14/129",
-                        "usageQualifier": "Left Index",
-                        "typeQualifier": "WSQ Compressed Image",
+                        "usageQualifier": 14,
+                        "typeQualifier": 129,
                         "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
                     }, {
                         "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/pkenny/biometrics/14/129",
-                        "usageQualifier": "Right Index",
-                        "typeQualifier": "WSQ Compressed Image",
+                        "usageQualifier": 21,
+                        "typeQualifier": 129,
                         "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
                     }
                 ]
@@ -477,7 +477,14 @@ A list of the normalised and raw score is returned for each biometirc
                 "scores" : [
                     {
                         "normalisedScore": "1.0e-3",
-                        "rawScore": "120"
+                        "rawScore": "120",
+                        "typeQualifier": 129,
+                        "usageQualifier": 14
+                    }, {
+                        "normalisedScore": "1.0e-3",
+                        "rawScore": "120",
+                        "typeQualifier": 129,
+                        "usageQualifier": 21
                     }
                 ]
             }
@@ -488,10 +495,14 @@ Performs a verification against an identity's biometric data with the biometric 
 + Request (application/json)
 
             {
-                "biometrics" : [
+                "biometrics":[
                     {
-                        "uq": "14",
-                        "tq": "129",
+                        "usageQualifier": 14,
+                        "typeQualifier": 129,
+                        "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                    }, {
+                        "usageQualifier": 21,
+                        "typeQualifier": 129,
                         "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
                     }
                 ]
