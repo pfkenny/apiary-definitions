@@ -306,7 +306,7 @@ Creates an Identity whereby DaonEngine will generate the *uname*. Note that the 
 # Group Biometrics
 Biometric-related resources of the *DaonEngine API*.
 
-## Biometric [/api_v1/domains/{id}/identities/{uname}/biometrics/{uq}/{tq}]
+## Biometric [/api_v1/domains/{id}/identities/{uname}/biometrics/{uq}/{tq}?{imageType}]
 A single biometric object. The Biometric resource is a resource of an identity that contains biometric data.
 
 The Biometric resource has the following attributes:
@@ -320,6 +320,7 @@ The Biometric resource has the following attributes:
     + uname (required, string, `pkenny`) ... String `uname` (unique name) of the identity to perform action with.
     + uq (required, number, `14`) ...Numeric `uq` (Usage Qualifier) is the usage qualfier of the biometric modality. eg. 14 is the usage qualfier of "Left Index" (Supported usage qualfiers are listed in the DaonEngine documentation)
     + tq (required, number, `129`) ...Numeric `tq` (Type Qualifier) is the type qualfier of the biometric data. eg. 129 is the type qualfier for a "WSQ Compressed Image" (Supported type qualfiers are listed in the DaonEngine documentation)
+    + imageType (optional, string, `png`) ... String `imageType` allows you to specify the image type you would like the biometric to come back as.
 
 + Model (application/json)
 
