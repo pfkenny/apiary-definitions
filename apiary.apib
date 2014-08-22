@@ -475,19 +475,18 @@ Performs a verification against an identity's biometric data with the biometric 
 
 + Request (application/json)
 
-            {
-                "biometrics":[
-                    {
-                        "usageQualifier": 14,
-                        "typeQualifier": 129,
-                        "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
-                    }, {
-                        "usageQualifier": 21,
-                        "typeQualifier": 129,
-                        "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
-                    }
-                ]
-            }
+            [
+                {
+                    "usageQualifier": 14,
+                    "typeQualifier": 129,
+                    "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                }, {
+                    "usageQualifier": 21,
+                    "typeQualifier": 129,
+                    "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                }
+            ]
+            
 
 + Response 200 (application/json)
 
