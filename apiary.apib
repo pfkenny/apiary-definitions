@@ -675,13 +675,14 @@ A resource that represents the results of a search operation.
 
     [Search Results][]
     
-##Adjudicate Search Results [/api_v1/domains/{id}/searchtransactions/{searchtransactionid}/searchadjudications]
+##Adjudicate Search Results [/api_v1/domains/{id}/searchtransactions/{searchtransactionid}/searchadjudications/{candidateIds}]
 A resource that represents the adjudications of a search operation. Search adjudications are generally created by DaonAdjudicate after an adjudicator 
 has made a decision as to whether or not candidates in the candidate list of a search result are genuine hits or not.
 
 + Parameters
     + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
     + searchtransactionid (required, string, `MWS000651`) ... String `searchtransactionid` of the search transaction to perform action with.
+    + candidateIds (optional, string, `daon:iid:8025,daon:iid:8207`) ... String `candidateIds of comma delaminated list of valid list of valid Identities.
     
 + Model (application/json)
 
@@ -691,10 +692,11 @@ has made a decision as to whether or not candidates in the candidate list of a s
     + Body
     
             {
-                "href": "http://daonengine.daon.com/api_v1/domains/9002/searchadjudications/MWS000651",
-                "searchAdjudications" : [
+                "href": "http://daonengine.daon.com/api_v1/domains/daon:iid:9002/searchtransactions/MWS000651/searchadjudications/daon:iid:8207,daon:iid:8025",
+                "total": 2,
+                "items" : [
                     {
-                        "candidateIdentifier" : "skastelli",
+                        "candidateIdentifier" : "daon:iid:8207",
                         "candidateRank" : 1,
                         "overallAdjudicationDecision" : {
                             "decision" : "MATCH",
@@ -704,17 +706,17 @@ has made a decision as to whether or not candidates in the candidate list of a s
                             {
                                 "decision" : "MATCH",
                                 "detail" : "A match due to sufficient number of minutiae matches.",
-                                "usageQualifier" : 15,
-                                "typeQualfiier" : 129
+                                "usageQualifier" : 27,
+                                "typeQualifier" : 129
                             }, {
                                 "decision" : "MATCH",
                                 "detail" : "A match due to identical scaring in lower part of print.",
                                 "usageQualifier" : 21,
-                                "typeQualfiier" : 129
+                                "typeQualifier" : 129
                             }
                         ]
                     }, {
-                        "candidateIdentifier" : "jbainbridge",
+                        "candidateIdentifier" : "daon:iid:8025",
                         "candidateRank" : 2,
                         "overallAdjudicationDecision" : {
                             "decision" : "NO_MATCH",
@@ -725,12 +727,12 @@ has made a decision as to whether or not candidates in the candidate list of a s
                                 "decision" : "NO_MATCH",
                                 "detail" : "Branching of ridge line in highlighted area is dissimilar to probe fingerprint.",
                                 "usageQualifier" : 15,
-                                "typeQualfiier" : 129
+                                "typeQualifier" : 129
                             }, {
                                 "decision" : "NO_MATCH",
                                 "detail" : "Minutiae are sufficiently dissimilar and can not be explained reasonably.",
                                 "usageQualifier" : 21,
-                                "typeQualfiier" : 129
+                                "typeQualifier" : 129
                             }
                         ]
                     }
@@ -748,7 +750,7 @@ has made a decision as to whether or not candidates in the candidate list of a s
         {
             "searchAdjudications" : [
                     {
-                        "candidateIdentifier" : "skastelli",
+                        "candidateIdentifier" : "daon:iid:8207",
                         "candidateRank" : 1,
                         "overallAdjudicationDecision" : {
                             "decision" : "MATCH",
@@ -759,16 +761,16 @@ has made a decision as to whether or not candidates in the candidate list of a s
                                 "decision" : "MATCH",
                                 "detail" : "A match due to sufficient number of minutiae matches.",
                                 "usageQualifier" : 15,
-                                "typeQualfiier" : 129
+                                "typeQualifier" : 129
                             }, {
                                 "decision" : "MATCH",
                                 "detail" : "A match due to identical scaring in lower part of print.",
                                 "usageQualifier" : 21,
-                                "typeQualfiier" : 129
+                                "typeQualifier" : 129
                             }
                         ]
                     }, {
-                        "candidateIdentifier" : "jbainbridge",
+                        "candidateIdentifier" : "daon:iid:8025",
                         "candidateRank" : 2,
                         "overallAdjudicationDecision" : {
                             "decision" : "NO_MATCH",
@@ -779,12 +781,12 @@ has made a decision as to whether or not candidates in the candidate list of a s
                                 "decision" : "NO_MATCH",
                                 "detail" : "Branching of ridge line in highlighted area is dissimilar to probe fingerprint.",
                                 "usageQualifier" : 15,
-                                "typeQualfiier" : 129
+                                "typeQualifier" : 129
                             }, {
                                 "decision" : "NO_MATCH",
                                 "detail" : "Minutiae are sufficiently dissimilar and can not be explained reasonably.",
                                 "usageQualifier" : 21,
-                                "typeQualfiier" : 129
+                                "typeQualifier" : 129
                             }
                         ]
                     }
@@ -802,8 +804,28 @@ has made a decision as to whether or not candidates in the candidate list of a s
 
         {
             "searchAdjudications" : [
-                    {
-                        "candidateIdentifier" : "jbainbridge",
+                   {
+                        "candidateIdentifier" : "daon:iid:8207",
+                        "candidateRank" : 1,
+                        "overallAdjudicationDecision" : {
+                            "decision" : "MATCH",
+                            "detail" : "A match due to sufficient similarities in fingerprints."
+                        },
+                        "sampleDecisions" : [
+                            {
+                                "decision" : "MATCH",
+                                "detail" : "A match due to sufficient number of minutiae matches.",
+                                "usageQualifier" : 15,
+                                "typeQualifier" : 129
+                            }, {
+                                "decision" : "MATCH",
+                                "detail" : "A match due to identical scaring in lower part of print.",
+                                "usageQualifier" : 21,
+                                "typeQualifier" : 129
+                            }
+                        ]
+                    }, {
+                        "candidateIdentifier" : "daon:iid:8025",
                         "candidateRank" : 2,
                         "overallAdjudicationDecision" : {
                             "decision" : "NO_MATCH",
@@ -812,9 +834,14 @@ has made a decision as to whether or not candidates in the candidate list of a s
                         "sampleDecisions" : [
                             {
                                 "decision" : "NO_MATCH",
+                                "detail" : "Branching of ridge line in highlighted area is dissimilar to probe fingerprint.",
+                                "usageQualifier" : 15,
+                                "typeQualifier" : 129
+                            }, {
+                                "decision" : "NO_MATCH",
                                 "detail" : "Minutiae are sufficiently dissimilar and can not be explained reasonably.",
                                 "usageQualifier" : 21,
-                                "typeQualfiier" : 129
+                                "typeQualifier" : 129
                             }
                         ]
                     }
