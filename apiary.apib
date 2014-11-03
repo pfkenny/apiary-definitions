@@ -202,15 +202,41 @@ If the membership uses the convention that the *groupName* is the name of a doma
 + Request (application/json)
 
             {
+                "biographics" : {
                 "firstName": "Paul",
                 "lastName": "Kenny"
+                },
+                "biometrics" : [ 
+                {"usageQualifier": 11,
+                "typeQualifier": 129,
+                "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="},
+                {"usageQualifier": 12,
+                "typeQualifier": 129,
+                "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="}
+                ]
             }
 
 + Parameters
     + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
     + uname (required, string, `pkenny`) ... String `uname` (unique name) of the identity to create.
+    
 
 + Response 201 (application/json)
+
+            Content-Type: application/json
+            {
+                "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/003a49d8-447c-4ec6-a639-cff67ffa7b38",
+                "uname": "003a49d8-447c-4ec6-a639-cff67ffa7b38",
+                "ciid": "1",
+                "createdDTM": "2014-07-16T13:48:22.378Z",
+                "biographics": {
+                    "firstName": "Paul",
+                    "lastName": "Kenny"
+                },
+                "biometrics": {
+                    "href": "http://daonengine.daon.com/api_v1/domains/9001/identities/003a49d8-447c-4ec6-a638-cff67ffa7b38/biometrics"
+                }
+            }
 
 
 ### Update an Identity [POST]
