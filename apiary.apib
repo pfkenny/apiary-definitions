@@ -209,18 +209,25 @@ If the membership uses the convention that the *groupName* is the name of a doma
 + Request (application/json)
 
             {
-                "biographics" : {
-                "firstName": "Paul",
-                "lastName": "Kenny"
+                
+                "biographics": {
+                    "firstName": "Paul",
+                    "lastName": "Kenny"
                 },
-                "biometrics" : [ 
-                {"usageQualifier": 11,
-                "typeQualifier": 129,
-                "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="},
-                {"usageQualifier": 12,
-                "typeQualifier": 129,
-                "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="}
-                ]
+                "biometrics": {
+                    "items": [
+                        {
+                            "usageQualifier": 11,
+                            "typeQualifier": 129,
+                            "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                        },
+                        {
+                            "usageQualifier": 12,
+                            "typeQualifier": 129,
+                            "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                        }
+                    ]
+                }
             }
 
 + Parameters
