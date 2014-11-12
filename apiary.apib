@@ -726,17 +726,17 @@ has made a decision as to whether or not candidates in the candidate list of a s
                         "candidateRank" : 1,
                         "overallAdjudicationDecision" : {
                             "decision" : "MATCH",
-                            "detail" : "A match due to sufficient similarities in fingerprints."
+                            "detail": "[{\"group\":\"probe\",\"text\":\"Probe Comment\"},{\"group\":\"candidate\",\"text\":\"A match due to sufficient similarities in fingerprints\"}]"
                         },
                         "sampleDecisions" : [
                             {
                                 "decision" : "MATCH",
-                                "detail" : "A match due to sufficient number of minutiae matches.",
-                                "usageQualifier" : 27,
+                                "detail": "[{\"group\":\"probe\",\"text\":\"Branching of ridge line\",\"type\":\"rect\",\"x\":0.2,\"y\":0.3,\"width\":0.15,\"height\":0.12},{\"group\":\"candidate\",\"text\":\"Minutiae are sufficiently dissimilar\",\"type\":\"rect\",\"x\":0.34,\"y\":0.62,\"width\":0.30,\"height\":0.15}]",
+                                "usageQualifier" : 15,
                                 "typeQualifier" : 129
                             }, {
                                 "decision" : "MATCH",
-                                "detail" : "A match due to identical scaring in lower part of print.",
+                                "detail": "[{\"group\":\"probe\",\"text\":\"loop\",\"type\":\"rect\",\"x\":0.2,\"y\":0.3,\"width\":0.15,\"height\":0.12},{\"group\":\"candidate\",\"text\":\"whorl\",\"type\":\"rect\",\"x\":0.34,\"y\":0.62,\"width\":0.30,\"height\":0.15}]",
                                 "usageQualifier" : 21,
                                 "typeQualifier" : 129
                             }
@@ -746,17 +746,17 @@ has made a decision as to whether or not candidates in the candidate list of a s
                         "candidateRank" : 2,
                         "overallAdjudicationDecision" : {
                             "decision" : "NO_MATCH",
-                            "detail" : "Not a match due to dissimilarities in fingerprints."
+                            "detail": "[{\"group\":\"probe\",\"text\":\"Probe Comment\"},{\"group\":\"candidate\",\"text\":\"Not a match due to dissimilarities in fingerprints.\"}]"
                         },
                         "sampleDecisions" : [
                             {
                                 "decision" : "NO_MATCH",
-                                "detail" : "Branching of ridge line in highlighted area is dissimilar to probe fingerprint.",
+                                "detail": "[{\"group\":\"probe\",\"text\":\"Branching of ridge line\",\"type\":\"rect\",\"x\":0.2,\"y\":0.3,\"width\":0.15,\"height\":0.12},{\"group\":\"candidate\",\"text\":\"Minutiae are sufficiently dissimilar\",\"type\":\"rect\",\"x\":0.34,\"y\":0.62,\"width\":0.30,\"height\":0.15}]",
                                 "usageQualifier" : 15,
                                 "typeQualifier" : 129
                             }, {
                                 "decision" : "NO_MATCH",
-                                "detail" : "Minutiae are sufficiently dissimilar and can not be explained reasonably.",
+                                "detail": "[{\"group\":\"probe\",\"text\":\"loop\",\"type\":\"rect\",\"x\":0.2,\"y\":0.3,\"width\":0.15,\"height\":0.12},{\"group\":\"candidate\",\"text\":\"whorl\",\"type\":\"rect\",\"x\":0.34,\"y\":0.62,\"width\":0.30,\"height\":0.15}]",
                                 "usageQualifier" : 21,
                                 "typeQualifier" : 129
                             }
