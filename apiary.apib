@@ -577,6 +577,170 @@ Performs a verification against an identity's biometric data with the biometric 
 #Group Search
 Search related resources of the *Daon Engine API*.
 
+##Asynchronous Search [/api_v1/domains/{id}/searchtransactions/{searchtransactionid}/]
+A resource used to perform asynchronous searches.
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + searchtransactionid (required, string, `MWS000651`) ... String `searchtransactionid` of the search transaction to perform action with.
+    
++ Model (application/json)
+
+    JSON representation of Search Data Resource.
+
+
+    + Body
+    
+            {
+                "searchPolicyId" : "900201008",
+                "groupIdentifiers" : {
+                    "Group 1", "Group 2"
+                },
+                "searchParameters" : {
+                    "candidateListSize" : 10,
+                    "matchThreshold" : 1.0E-3
+                },
+                "resultNotificationAddress" : "http://return.address.com/return-service",
+                "probeIdentity" : {
+                    "biographics" : {
+                        "firstName" : "Bobby",
+                        "lastName" : "Smith",
+                    },
+                    "biometrics" : {
+                        "items": [
+                            {
+                                "usageQualifier": 15,
+                                "typeQualifier": 129,
+                                "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                            },
+                            {
+                                "usageQualifier": 21,
+                                "typeQualifier": 129,
+                                "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                            }
+                        ]
+                    }
+                }
+            }
+
+### Perform a Search [POST]
+Initiates an Asynchronous Search against a domain using the biometric data supplied in the request body.  
+Group membership can be used to search only those groups.  
+If the resultNotificationAddress is supplied, the search results will be sent there when available.  
+Use the Search Results resource to check the status of the search request.
+
++ Request (application/json)
+
+    [Asynchronous Search][]
+            
+
++ Response 201 (application/json)
+
+    [Search Data][]
+    
+##Synchronous Search [/api_v1/domains/{id}/searchtransactions/]
+A resource used to perform asynchronous searches.
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    
++ Model (application/json)
+
+    JSON representation of Search Data Resource.
+
+
+    + Body
+    
+            {
+                "searchPolicyId" : "900201008",
+                "groupIdentifiers" : {
+                    "Group 1", "Group 2"
+                },
+                "searchParameters" : {
+                    "candidateListSize" : 10,
+                    "matchThreshold" : 1.0E-3
+                },
+                "probeIdentity" : {
+                    "biographics" : {
+                        "firstName" : "Bobby",
+                        "lastName" : "Smith",
+                    },
+                    "biometrics" : {
+                        "items": [
+                            {
+                                "usageQualifier": 15,
+                                "typeQualifier": 129,
+                                "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                            },
+                            {
+                                "usageQualifier": 21,
+                                "typeQualifier": 129,
+                                "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
+                            }
+                        ]
+                    }
+                }
+            }
+
+### Perform a Search [POST]
+Performs a synchronous Search against a domain using the biometric data supplied in the request body.  
+Group membership can be used to search only those groups.  
+
++ Request (application/json)
+
+    [Synchronous Search][]
+            
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "candidates" : [
+                    {
+                        "href" : "http://daonengine.daon.com/api_v1/domains/9002/identities/skastelli",
+                        "uname" : "skastelli",
+                        "rank" : 1,
+                        "result" : "HIT",
+                        "fusedScore" : "1.0e-3",
+                        "scores" : [
+                            {
+                                "normalisedScore": "1.0e-3",
+                                "rawScore": "120",
+                                "typeQualifier": 129,
+                                "usageQualifier": 14
+                            },
+                            {
+                                "normalisedScore": "1.0e-3",
+                                "rawScore": "120",
+                                "typeQualifier": 129,
+                                "usageQualifier": 21
+                            }
+                        ]
+                    }, {
+                        "href" : "http://daonengine.daon.com/api_v1/domains/9002/identities/jbainbridge",
+                        "uname" : "jbainbridge",
+                        "rank" : 2,
+                        "result" : "HIT",
+                        "scores" : [
+                            {
+                                "normalisedScore": "1.0e-3",
+                                "rawScore": "120",
+                                "typeQualifier": 129,
+                                "usageQualifier": 14
+                            },
+                            {
+                                "normalisedScore": "1.0e-3",
+                                "rawScore": "120",
+                                "typeQualifier": 129,
+                                "usageQualifier": 21
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
 ##Search Data [/api_v1/domains/{id}/searchtransactions/{searchtransactionid}/searchdata]
 A resource that represents the data that was sent in to a search operation.
 
