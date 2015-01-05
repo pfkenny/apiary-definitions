@@ -471,7 +471,7 @@ List all of the biometrics stored against an identity in DaonEngine.
 # Group Verifications
 Verification-related resources of the *DaonEngine API*.
 
-## Verification [/api_v1/domains/{id}/identities/{uname}/verifications]
+## Verification [/api_v1/domains/{id}/identities/{uname}/verifications{?policyId,transformId}]
 A resource that is used to perform verifications against identities stored in DaonEngine. 
 
 - verifyResult : The match result as determined by the policy
@@ -484,6 +484,8 @@ A list of the normalised and raw score is returned for each biometirc
 + Parameters
     + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
     + uname (required, string, `pkenny`) ... String `uname` (unique name) of the identity to perform action with.
+    + policyId (required, string, `982615207`) ... String `policyId` (policy identifier) of the policy to perform the verification with.
+    + transformId (optional, string, `900201764`) ... String `transformId` (transform identifier) of the transform policy to apply to incoming data before the action is performed.
 
 + Model (application/json)
 
@@ -515,17 +517,57 @@ Performs a verification against an identity's biometric data with the biometric 
 
 + Request (application/json)
 
-            [
-                {
-                    "usageQualifier": 14,
-                    "typeQualifier": 129,
-                    "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
-                }, {
-                    "usageQualifier": 21,
-                    "typeQualifier": 129,
-                    "biometricData": "QmFzZTY0IEVuY29kZWQgQmlvbWV0cmljIERhdGE="
-                }
-            ]
+            {
+                "biometrics": [
+                    {
+                        "TypeQualifier": 129,
+                        "UsageQualifier": 21,
+                        "Data": "/9j/4AAQSkZJRgAB"
+                    }
+                ]
+            }
+            
+
++ Response 200 (application/json)
+
+    [Verification][]
+    
+## Verify [/api_v1/domains/{id}/verify{?policyId,transformId}]
+A resource that is used to perform a verify operation against 2 sets of supplied data. 
+
+- verifyResult : The match result as determined by the policy
+- fusedScore : The fused FMR probablility for the overall match
+ - normalisedScore: The normalised FMR probability
+ - rawScore : The raw score from the algorithm
+
+A list of the normalised and raw score is returned for each biometirc
+
++ Parameters
+    + id (required, number, `9001`) ... Numeric `id` of the domain to perform action with.
+    + policyId (required, string, `982615207`) ... String `policyId` (policy identifier) of the policy to perform the verification with.
+    + transformId (optional, string, `900201764`) ... String `transformId` (transform identifier) of the transform policy to apply to incoming data before the action is performed.
+
+### Perform a Verify [POST]
+Performs a verification against an identity's biometric data with the biometric data supplied in the request body.
+
++ Request (application/json)
+
+            {
+                "biometrics": [
+                    {
+                        "TypeQualifier": 129,
+                        "UsageQualifier": 21,
+                        "Data": "/9j/4AAQSkZJRgAB"
+                    }
+                ],
+                "referenceBiometrics": [
+                    {
+                        "TypeQualifier": 129,
+                        "UsageQualifier": 21,
+                        "Data": "/9j/4AAQSkZJRgAB"
+                    }
+                ]
+            }
             
 
 + Response 200 (application/json)
