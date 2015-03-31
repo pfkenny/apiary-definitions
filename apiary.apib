@@ -125,6 +125,50 @@ A Domain with all its details
                 "identities": {
                     "href": "http://daonengine.daon.com/api_v1/domains/9001/identities"
                 }
+                "DomainBiographicFields":{
+                    "StringItemInfo":{
+                        "id" : "FIRST_NAME",
+                        "required" : "false"
+                    },
+                    "StringItemInfo":{
+                        "id" : "LAST_NAME",
+                        "required" : "false"
+                    },
+                    "TimestampItem" : {
+                        "id" : "CREATED_DTM",
+                        "required" : "false"
+                    },
+                    "LongItem" :{ 
+                        "id" : "AGE",
+                        "required" : "false"
+                    },
+                    "DoubleItem": {
+                        "id" : "AMOUNT",
+                        "required" : "false"
+                    }
+                    "DateItem" : {
+                        "id" : "DOB",
+                        "required" : "false"
+                    }
+                    "ExtendedStringItem" : {
+                        "id" : "CREDIT_CARD_NUMBER",
+                        "required" : "false"
+                    }
+                    "ExtendedBinaryItem" : {
+                        "id" : "PHOTOGRAPH",
+                        "required" : "false"
+                    }
+                }
+                "DoaminTypeQualifiers":{
+                    "TypeQualifier":{
+                        "id" : "129",
+                        "name" : "WSQ Compressed Image"
+                    },
+                    "TypeQualifier":{
+                        "id" : "44",
+                        "name" : "DaonFace - Facial Image - JPEG"
+                    }
+                }
             }
 
 # Group Identity
