@@ -125,41 +125,37 @@ A Domain with all its details
                 "identities": {
                     "href": "http://daonengine.daon.com/api_v1/domains/9001/identities"
                 }
-                "DomainBiographicFields":{
-                    "StringItemInfo":{
-                        "id" : "FIRST_NAME",
-                        "required" : "false"
-                    },
-                    "StringItemInfo":{
-                        "id" : "LAST_NAME",
+               "BiographicData": {
+                    "StringItem": {
+                        "name" : "FIRST_NAME",
                         "required" : "false"
                     },
                     "TimestampItem" : {
-                        "id" : "CREATED_DTM",
+                        "name" : "CREATED_DTM",
                         "required" : "false"
                     },
                     "LongItem" :{ 
-                        "id" : "AGE",
+                        "name" : "AGE",
                         "required" : "false"
                     },
                     "DoubleItem": {
-                        "id" : "AMOUNT",
+                        "name" : "AMOUNT",
                         "required" : "false"
                     }
                     "DateItem" : {
-                        "id" : "DOB",
+                        "name" : "DOB",
                         "required" : "false"
-                    }
+                    }                    
                     "ExtendedStringItem" : {
-                        "id" : "CREDIT_CARD_NUMBER",
+                        "name" : "CREDIT_CARD_NUMBER",
                         "required" : "false"
                     }
                     "ExtendedBinaryItem" : {
-                        "id" : "PHOTOGRAPH",
+                        "name" : "PHOTOGRAPH",
                         "required" : "false"
                     }
                 }
-                "DoaminTypeQualifiers":{
+                "BiometricData":{
                     "TypeQualifier":{
                         "id" : "129",
                         "name" : "WSQ Compressed Image"
