@@ -125,33 +125,33 @@ A Domain with all its details
                 "identities": {
                     "href": "http://daonengine.daon.com/api_v1/domains/9001/identities"
                 }
-               "BiographicData": {
-                    "StringItem": {
-                        "name" : "FIRST_NAME",
+               "biographics": {
+                    "FIRST_NAME" : {
+                        "type" : "string",
                         "required" : "false"
                     },
-                    "TimestampItem" : {
-                        "name" : "CREATED_DTM",
+                    "CREATED_DTM" : {
+                        "type" : "timestamp",
                         "required" : "false"
                     },
-                    "LongItem" :{ 
-                        "name" : "AGE",
+                    "AGE" : {
+                        "type" : "long",
                         "required" : "false"
                     },
-                    "DoubleItem": {
-                        "name" : "AMOUNT",
+                    "AMOUNT" : {
+                        "type" : "double",
                         "required" : "false"
-                    }
-                    "DateItem" : {
-                        "name" : "DOB",
+                    },
+                    "DOB" : {
+                        "type" : "date",
                         "required" : "false"
-                    }                    
-                    "ExtendedStringItem" : {
-                        "name" : "CREDIT_CARD_NUMBER",
+                    },
+                    "CREDIT_CARD_NUMBER" : {
+                        "type" : "extendedStringItem",
                         "required" : "false"
-                    }
-                    "ExtendedBinaryItem" : {
-                        "name" : "PHOTOGRAPH",
+                    },
+                    "PHOTOGRAPH" : {
+                        "type" : "extendedBinaryItem",
                         "required" : "false"
                     }
                 }
